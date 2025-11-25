@@ -10,17 +10,14 @@ class reservation extends Model
 
     protected $fillable = [
         'numero_reservation',
-        'salle_id',
+        'spectacle_id',
         'user_id',
-        'date_reservation',
-        'heure_debut',
-        'prix',
         'nombre_personnes',
     ];
 
-    public function salle()
+    public function spectacle()
     {
-        return $this->belongsTo(salle::class);
+        return $this->belongsTo(Spectacle::class);
     }
 
     public function user()

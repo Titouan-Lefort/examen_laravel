@@ -30,7 +30,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('name', 191);
             $table->string('title')->nullable();
-            $table->integer('scope' )->nullable()->index();
+            $table->integer('scope')->nullable()->index();
             $table->timestamps();
 
             $table->unique(

@@ -15,6 +15,23 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <x-nav-link :href="route('reservation.index')" :active="request()->routeIs('reservation.index')">
+                        {{ __('Réserver') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('reservation.my')" :active="request()->routeIs('reservation.my')">
+                        {{ __('Mes Réservations') }}
+                    </x-nav-link>
+
+                    @if(Auth::user()->isAn('admin'))
+                        <x-nav-link :href="route('salle.index')" :active="request()->routeIs('salle.*')">
+                            {{ __('Gestion Salles') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('spectacle.index')" :active="request()->routeIs('spectacle.*')">
+                            {{ __('Gestion Spectacles') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,6 +87,23 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('reservation.index')" :active="request()->routeIs('reservation.index')">
+                {{ __('Réserver') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('reservation.my')" :active="request()->routeIs('reservation.my')">
+                {{ __('Mes Réservations') }}
+            </x-responsive-nav-link>
+
+            @if(Auth::user()->isAn('admin'))
+                <x-responsive-nav-link :href="route('salle.index')" :active="request()->routeIs('salle.*')">
+                    {{ __('Gestion Salles') }}
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('spectacle.index')" :active="request()->routeIs('spectacle.*')">
+                    {{ __('Gestion Spectacles') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

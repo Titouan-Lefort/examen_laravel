@@ -14,8 +14,8 @@ class salle extends Model
         'adresse',
     ];
 
-    public function reservations()
+    public function spectacles()
     {
-        return $this->hasMany(reservation::class);
+        return $this->hasMany(Spectacle::class);
     }
 }

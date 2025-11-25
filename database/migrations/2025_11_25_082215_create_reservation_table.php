@@ -14,11 +14,12 @@ return new class extends Migration
         Schema::create('reservation', function (Blueprint $table) {
             $table->id();
             $table->string('numero_reservation')->unique();
-            $table->foreignId('salle_id')->constrained('salle')->onDelete('cascade');
+            // $table->foreignId('salle_id')->constrained('salle')->onDelete('cascade'); // Removed
+            $table->foreignId('spectacle_id')->constrained('spectacles')->onDelete('cascade'); // Added
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->date('date_reservation');
-            $table->time('heure_debut');
-            $table->decimal('prix', 8, 2);
+            // $table->date('date_reservation'); // Removed
+            // $table->time('heure_debut'); // Removed
+            // $table->decimal('prix', 8, 2); // Removed
             $table->integer('nombre_personnes');
             $table->timestamps();
         });
