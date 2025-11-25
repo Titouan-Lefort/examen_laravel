@@ -77,7 +77,7 @@ class SpectacleController extends Controller
         $spectacle = Spectacle::findOrFail($id);
         $spectacle->update($request->all());
 
-        return redirect()->route('spectacle.index')->with('success', 'Spectacle mis à jour avec succès.');
+        return redirect()->route('salle.show', $spectacle->salle_id)->with('success', 'Spectacle mis à jour avec succès.');
     }
 
     /**

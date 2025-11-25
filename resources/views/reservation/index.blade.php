@@ -19,11 +19,11 @@
                     <table class="min-w-full w-full table-auto">
                         <thead>
                             <tr class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-200 uppercase text-lg leading-normal">
-                                <th class="py-4 px-6 text-left">Date & Heure</th>
-                                <th class="py-4 px-6 text-left">Salle</th>
-                                <th class="py-4 px-6 text-left">Prix</th>
-                                <th class="py-4 px-6 text-left">Places Restantes</th>
-                                <th class="py-4 px-6 text-center">Actions</th>
+                                <th class="py-4 px-6 text-left">{{ __('Date & Heure') }}</th>
+                                <th class="py-4 px-6 text-left">{{ __('Salle') }}</th>
+                                <th class="py-4 px-6 text-left">{{ __('Prix') }}</th>
+                                <th class="py-4 px-6 text-left">{{ __('Places Restantes') }}</th>
+                                <th class="py-4 px-6 text-center">{{ __('Actions') }}</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 dark:text-gray-200 text-xl font-light">
@@ -44,13 +44,13 @@
                                 </td>
                                 <td class="py-4 px-6 text-center" onclick="event.stopPropagation()">
                                     <a href="{{ route('reservation.show', $spectacle->id) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                        Réserver
+                                        {{ __('Réserver') }}
                                     </a>
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="5" class="py-6 px-6 text-center">Aucun spectacle disponible pour le moment.</td>
+                                <td colspan="5" class="py-6 px-6 text-center">{{ __('Aucun spectacle disponible pour le moment.') }}</td>
                             </tr>
                             @endforelse
                         </tbody>

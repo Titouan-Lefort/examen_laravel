@@ -2,12 +2,12 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for C:\code\examen_laravel\app\Http\Requests\Auth</title>
+  <title>Dashboard for C:\code\examen_laravel\app\Http\Middleware</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="../../../_css/bootstrap.min.css?v=12.4.0" rel="stylesheet" type="text/css">
-  <link href="../../../_css/billboard.min.css?v=12.4.0" rel="stylesheet" type="text/css">
-  <link href="../../../_css/style.css?v=12.4.0" rel="stylesheet" type="text/css">
-  <link href="../../../_css/custom.css" rel="stylesheet" type="text/css">
+  <link href="../../_css/bootstrap.min.css?v=12.4.0" rel="stylesheet" type="text/css">
+  <link href="../../_css/billboard.min.css?v=12.4.0" rel="stylesheet" type="text/css">
+  <link href="../../_css/style.css?v=12.4.0" rel="stylesheet" type="text/css">
+  <link href="../../_css/custom.css" rel="stylesheet" type="text/css">
  </head>
  <body>
   <header>
@@ -16,10 +16,9 @@
      <div class="col-md-12">
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
-         <li class="breadcrumb-item"><a href="../../../index.html">C:\code\examen_laravel\app</a></li>
-         <li class="breadcrumb-item"><a href="../../index.html">Http</a></li>
-         <li class="breadcrumb-item"><a href="../index.html">Requests</a></li>
-         <li class="breadcrumb-item"><a href="index.html">Auth</a></li>
+         <li class="breadcrumb-item"><a href="../../index.html">C:\code\examen_laravel\app</a></li>
+         <li class="breadcrumb-item"><a href="../index.html">Http</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Middleware</a></li>
          <li class="breadcrumb-item active">(Dashboard)</li>
 
        </ol>
@@ -60,7 +59,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="LoginRequest.php.html#12">App\Http\Requests\Auth\LoginRequest</a></td><td class="text-right">65%</td></tr>
+       <tr><td><a href="IsUser.php.html#10">App\Http\Middleware\IsUser</a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -79,7 +78,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="LoginRequest.php.html#12">App\Http\Requests\Auth\LoginRequest</a></td><td class="text-right">65.2%</td><td class="text-right">7</td><td class="text-right">9</td></tr>
+       <tr><td><a href="IsUser.php.html#10">App\Http\Middleware\IsUser</a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
 
        </tbody>
       </table>
@@ -117,7 +116,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="LoginRequest.php.html#60"><abbr title="App\Http\Requests\Auth\LoginRequest::ensureIsNotRateLimited">ensureIsNotRateLimited</abbr></a></td><td class="text-right">20%</td></tr>
+       <tr><td><a href="IsUser.php.html#17"><abbr title="App\Http\Middleware\IsUser::handle">handle</abbr></a></td><td class="text-right">0%</td></tr>
 
        </tbody>
       </table>
@@ -136,7 +135,7 @@
         </tr>
        </thead>
        <tbody>
-       <tr><td><a href="LoginRequest.php.html#60"><abbr title="App\Http\Requests\Auth\LoginRequest::ensureIsNotRateLimited">ensureIsNotRateLimited</abbr></a></td><td class="text-right">20.0%</td><td class="text-right">2</td><td class="text-right">4</td></tr>
+       <tr><td><a href="IsUser.php.html#17"><abbr title="App\Http\Middleware\IsUser::handle">handle</abbr></a></td><td class="text-right">0.0%</td><td class="text-right">3</td><td class="text-right">12</td></tr>
 
        </tbody>
       </table>
@@ -150,9 +149,9 @@
     </p>
    </footer>
   </div>
-  <script src="../../../_js/billboard.pkgd.min.js?v=12.4.0" type="text/javascript"></script>
-  <script type="application/json" id="complexity_class">[[65.21739130434783,7,"LoginRequest.php.html#12","App\\Http\\Requests\\Auth\\LoginRequest","9.06"]]</script>
-  <script type="application/json" id="complexity_method">[[20,2,"LoginRequest.php.html#60","App\\Http\\Requests\\Auth\\LoginRequest::ensureIsNotRateLimited","4.05"],[100,1,"LoginRequest.php.html#17","App\\Http\\Requests\\Auth\\LoginRequest::authorize","1"],[100,1,"LoginRequest.php.html#27","App\\Http\\Requests\\Auth\\LoginRequest::rules","1"],[100,2,"LoginRequest.php.html#40","App\\Http\\Requests\\Auth\\LoginRequest::authenticate","2"],[100,1,"LoginRequest.php.html#81","App\\Http\\Requests\\Auth\\LoginRequest::throttleKey","1"]]</script>
+  <script src="../../_js/billboard.pkgd.min.js?v=12.4.0" type="text/javascript"></script>
+  <script type="application/json" id="complexity_class">[[0,3,"IsUser.php.html#10","App\\Http\\Middleware\\IsUser","12"],[100,3,"IsAdmin.php.html#9","App\\Http\\Middleware\\IsAdmin","3"]]</script>
+  <script type="application/json" id="complexity_method">[[0,3,"IsUser.php.html#17","App\\Http\\Middleware\\IsUser::handle","12"],[100,3,"IsAdmin.php.html#16","App\\Http\\Middleware\\IsAdmin::handle","3"]]</script>
   <script type="text/javascript" defer>
   const barLabels = [
     '0%',
@@ -221,10 +220,10 @@
     },
   });
   bb.generate(
-    barConfig('classes', "Class Coverage", [0,0,0,0,0,0,0,1,0,0,0,0])
+    barConfig('classes', "Class Coverage", [1,0,0,0,0,0,0,0,0,0,0,1])
   );
   bb.generate(
-    barConfig('methods', "Method Coverage", [0,0,0,1,0,0,0,0,0,0,0,4])
+    barConfig('methods', "Method Coverage", [1,0,0,0,0,0,0,0,0,0,0,1])
   );
 
   const scatterConfig = (name, complexityData) => ({

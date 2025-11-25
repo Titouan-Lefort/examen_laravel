@@ -1,29 +1,34 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SalleController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\SpectacleController;
+use App\Http\Middleware\IsUser;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
-Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('index');
-    })->name('index');
+Route::get('locale/{locale}', function ($locale) {
+    if (in_array($locale, ['en', 'fr'])) {
+        Session::put('locale', $locale);
+    }
+    return redirect()->back();
+})->name('locale.switch');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('index');
+});
 
-    Route::get('/my-reservations', [ReservationController::class, 'myReservations'])->name('reservation.my');
+Route::middleware(['auth', IsUser::class])->group(function () {
     Route::resource('reservation', ReservationController::class);
+    Route::get('my-reservations', [ReservationController::class, 'myReservations'])->name('reservation.my');
 });
 
 Route::middleware(['auth', 'admin'])->group(function () {
         Route::resource('salle', SalleController::class);
         Route::resource('spectacle', SpectacleController::class);
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

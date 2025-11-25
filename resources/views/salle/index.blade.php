@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-end mb-6">
                 <a href="{{ route('salle.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Ajouter une salle
+                    {{ __('Ajouter une salle') }}
                 </a>
             </div>
 
@@ -24,10 +24,10 @@
                     <table class="min-w-full w-full table-auto">
                         <thead>
                             <tr class="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-200 uppercase text-lg leading-normal">
-                                <th class="py-4 px-6 text-left">Nom</th>
-                                <th class="py-4 px-6 text-left">Capacité</th>
-                                <th class="py-4 px-6 text-left">Adresse</th>
-                                <th class="py-4 px-6 text-center">Actions</th>
+                                <th class="py-4 px-6 text-left">{{ __('Nom') }}</th>
+                                <th class="py-4 px-6 text-left">{{ __('Capacité') }}</th>
+                                <th class="py-4 px-6 text-left">{{ __('Adresse') }}</th>
+                                <th class="py-4 px-6 text-center">{{ __('Actions') }}</th>
                             </tr>
                         </thead>
                         <tbody class="text-gray-600 dark:text-gray-200 text-xl font-light">
@@ -49,7 +49,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                                             </svg>
                                         </a>
-                                        <form action="{{ route('salle.destroy', $salle->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette salle ?');" class="inline-block">
+                                        <form action="{{ route('salle.destroy', $salle->id) }}" method="POST" onsubmit="return confirm('{{ __('Êtes-vous sûr de vouloir supprimer cette salle ?') }}');" class="inline-block">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="transform hover:text-red-500 hover:scale-110 inline-block">
