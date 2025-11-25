@@ -2,43 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSpectacleRequest;
+use App\Http\Requests\UpdateSpectacleRequest;
 use App\Models\Salle;
 use App\Models\Spectacle;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class SpectacleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         $spectacles = Spectacle::with('salle')->orderBy('date_spectacle')->get();
+
         return view('spectacle.index', compact('spectacles'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(Request $request): View
     {
         $salles = Salle::all();
         $selected_salle_id = $request->query('salle_id');
+
         return view('spectacle.create', compact('salles', 'selected_salle_id'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreSpectacleRequest $request): RedirectResponse
     {
-        $request->validate([
-            'salle_id' => 'required|exists:salle,id',
-            'date_spectacle' => 'required|date|after:today',
-            'heure_spectacle' => 'required',
-            'prix' => 'required|numeric|min:0',
-        ]);
-
         Spectacle::create($request->all());
 
         return redirect()->route('spectacle.index')->with('success', 'Spectacle ajouté avec succès.');
@@ -47,33 +46,26 @@ class SpectacleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): void
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
         $spectacle = Spectacle::findOrFail($id);
         $salles = Salle::all();
+
         return view('spectacle.edit', compact('spectacle', 'salles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSpectacleRequest $request, string $id): RedirectResponse
     {
-        $request->validate([
-            'salle_id' => 'required|exists:salle,id',
-            'date_spectacle' => 'required|date',
-            'heure_spectacle' => 'required',
-            'prix' => 'required|numeric|min:0',
-        ]);
-
         $spectacle = Spectacle::findOrFail($id);
         $spectacle->update($request->all());
 
@@ -83,7 +75,7 @@ class SpectacleController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
         $spectacle = Spectacle::findOrFail($id);
         $spectacle->delete();

@@ -4,8 +4,8 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Silber\Bouncer\BouncerFacade as Bouncer;
 use Illuminate\Support\Facades\Hash;
+use Silber\Bouncer\BouncerFacade as Bouncer;
 
 class Userseeder extends Seeder
 {
@@ -30,5 +30,4 @@ class Userseeder extends Seeder
         // Assign admin role to user
         Bouncer::assign('user')->to($user);
     }
-
 }

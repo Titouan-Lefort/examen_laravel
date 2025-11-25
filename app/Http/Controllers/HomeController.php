@@ -4,17 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use App\Models\Salle;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(): View
     {
         // 1. Salles avec le nombre de réservations à venir
         $salles = Salle::with(['spectacles' => function ($query) {
             $query->where('date_spectacle', '>=', now());
-        }, 'spectacles.reservations'])->get();
+        }, 'spectacles.reservations',
+        ])->get();
 
         $sallesData = $salles->map(function ($salle) {
             $upcomingReservationsCount = $salle->spectacles->sum(function ($spectacle) {

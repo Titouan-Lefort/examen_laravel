@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Spectacle;
+use App\Http\Requests\StoreReservationRequest;
+use App\Http\Requests\UpdateReservationRequest;
 use App\Models\Reservation;
-use App\Models\Salle;
+use App\Models\Spectacle;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 
 class ReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         // Get all spectacles that are in the future
         $spectacles = Spectacle::where('date_spectacle', '>=', now()->toDateString())
@@ -37,6 +39,7 @@ class ReservationController extends Controller
                     'prix' => $spectacle->prix,
                 ];
             }
+
             return null;
         })->filter();
 
@@ -46,7 +49,7 @@ class ReservationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(Request $request)
+    public function create(Request $request): RedirectResponse
     {
         // Not used anymore for creating NEW slots, but maybe for reserving a specific spectacle?
         // Actually, the user flow is: Select a spectacle -> Reserve.
@@ -60,13 +63,9 @@ class ReservationController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreReservationRequest $request): RedirectResponse
     {
-        $request->validate([
-            'spectacle_id' => 'required|exists:spectacles,id',
-            'nombre_personnes' => 'required|integer|min:1',
-        ]);
-
+        /** @var Spectacle $spectacle */
         $spectacle = Spectacle::findOrFail($request->spectacle_id);
         $salle = $spectacle->salle;
 
@@ -89,25 +88,28 @@ class ReservationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $id): View
     {
         // Show details of a SPECTACLE to reserve
+        /** @var Spectacle $spectacle */
         $spectacle = Spectacle::with('salle')->findOrFail($id);
 
         $totalReserved = $spectacle->reservations()->sum('nombre_personnes');
         $remainingPlaces = $spectacle->salle->capacite - $totalReserved;
 
         return view('reservation.show', compact('spectacle', 'remainingPlaces'));
-    }    /**
+    }
+
+    /**
      * Display a listing of the user's reservations.
      */
-    public function myReservations()
+    public function myReservations(): View
     {
         $reservations = Reservation::where('user_id', Auth::id())
             ->with(['spectacle.salle'])
             ->get()
-            ->sortByDesc(function($reservation) {
-                return $reservation->spectacle->date_spectacle . ' ' . $reservation->spectacle->heure_spectacle;
+            ->sortByDesc(function ($reservation) {
+                return $reservation->spectacle->date_spectacle.' '.$reservation->spectacle->heure_spectacle;
             });
 
         return view('reservation.my_reservations', compact('reservations'));
@@ -116,7 +118,7 @@ class ReservationController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
         $reservation = Reservation::with(['spectacle.salle'])
             ->where('id', $id)
@@ -139,16 +141,12 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateReservationRequest $request, string $id): RedirectResponse
     {
         $reservation = Reservation::with('spectacle.salle')
             ->where('id', $id)
             ->where('user_id', Auth::id())
             ->firstOrFail();
-
-        $request->validate([
-            'nombre_personnes' => 'required|integer|min:1',
-        ]);
 
         $spectacle = $reservation->spectacle;
         $salle = $spectacle->salle;
@@ -172,7 +170,7 @@ class ReservationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
         $reservation = Reservation::where('id', $id)
             ->where('user_id', Auth::id())

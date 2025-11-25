@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Silber\Bouncer\BouncerFacade as Bouncer;
-
 
 class Permseeder extends Seeder
 {
@@ -14,12 +12,12 @@ class Permseeder extends Seeder
         // --- CRÉATION DES RÔLES ---
         $adminRole = Bouncer::role()->firstOrCreate([
             'name' => 'admin',
-            'title' => 'Administrator'
+            'title' => 'Administrator',
         ]);
 
         $userRole = Bouncer::role()->firstOrCreate([
             'name' => 'user',
-            'title' => 'User'
+            'title' => 'User',
         ]);
 
         $gestion_salle = Bouncer::ability()->firstOrCreate(['name' => 'gestion_salle']);
@@ -31,6 +29,3 @@ class Permseeder extends Seeder
 
     }
 }
-
-
-
